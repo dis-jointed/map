@@ -1,4 +1,4 @@
-package com.buupass.moshclient.home
+package com.buupass.moshclient.display.home
 
 import androidx.compose.foundation.*
 import androidx.compose.foundation.layout.*
@@ -25,9 +25,10 @@ import androidx.compose.ui.unit.sp
 import androidx.constraintlayout.compose.ConstraintLayout
 import com.masjid.timetable.fragments.maps.MapScreen
 import com.buupass.moshclient.R
+import com.buupass.moshclient.model.FakeDataResItem
 
 @Composable
-fun HomeScreen() {
+fun HomeScreen(productList : List<FakeDataResItem>) {
     ConstraintLayout() {
         val (map, mapdetailsCont) = createRefs()
 
@@ -42,7 +43,8 @@ fun HomeScreen() {
 
         Column(
             modifier = Modifier
-                .fillMaxWidth().fillMaxHeight(.63f)
+                .fillMaxWidth()
+                .fillMaxHeight(.63f)
                 .background(
                     brush = Brush.verticalGradient(
                         listOf(
@@ -110,7 +112,7 @@ fun HomeScreen() {
             Row(
                 modifier = Modifier.fillMaxWidth(),
                 verticalAlignment = Alignment.CenterVertically,
-                horizontalArrangement = Arrangement.spacedBy(60.dp)
+                horizontalArrangement = Arrangement.spacedBy(30.dp)
             ) {
 
                 Row(
@@ -122,7 +124,7 @@ fun HomeScreen() {
                     Row(
                         modifier = Modifier
                             .size(30.dp)
-                            .background(color = Color.LightGray.copy(.75f), shape = CircleShape),
+                            .background(color = Color.LightGray.copy(.4f), shape = CircleShape),
                         verticalAlignment = Alignment.CenterVertically,
                         horizontalArrangement = Arrangement.Center
                     ) {
@@ -157,7 +159,7 @@ fun HomeScreen() {
                     Row(
                         modifier = Modifier
                             .size(30.dp)
-                            .background(color = Color.LightGray.copy(.75f), shape = CircleShape),
+                            .background(color = Color.LightGray.copy(.4f), shape = CircleShape),
                         verticalAlignment = Alignment.CenterVertically,
                         horizontalArrangement = Arrangement.Center
                     ) {
@@ -197,9 +199,10 @@ fun HomeScreen() {
             }
 
             LazyRow(modifier = Modifier.fillMaxWidth()) {
-                itemsIndexed(items = list) { index, item ->
+                itemsIndexed(items = productList) { index, item ->
 
-                    Image(
+                    ProductCard(fakeDataResItem = item)
+                  /*  Image(
                         painter = painterResource(id = item),
                         contentDescription = "",
                         modifier = Modifier
@@ -209,7 +212,7 @@ fun HomeScreen() {
                                 RoundedCornerShape(20.dp)
                             ),
                         contentScale = ContentScale.Crop
-                    )
+                    )*/
                 }
             }
 
@@ -285,11 +288,12 @@ fun ReviewItem() {
             .padding(horizontal = 10.dp)
             .width(300.dp)
             .background(color = Color.LightGray.copy(.3f), shape = RoundedCornerShape(12.dp))
-            .padding(10.dp)
+            .padding(10.dp),
+        verticalArrangement = Arrangement.spacedBy(5.dp)
     ) {
         Row(
             verticalAlignment = Alignment.CenterVertically,
-            horizontalArrangement = Arrangement.spacedBy(5.dp)
+            horizontalArrangement = Arrangement.spacedBy(9.dp)
         ) {
             Image(
                 painter = painterResource(id = R.drawable.one),
@@ -304,8 +308,8 @@ fun ReviewItem() {
                     text = "Alicia Osborne",
                     style = TextStyle(
                         color = Color.Black,
-                        fontSize = 11.sp,
-                        fontWeight = FontWeight.Medium
+                        fontSize = 14.sp,
+                        fontWeight = FontWeight.Bold
                     )
                 )
                 Row(
